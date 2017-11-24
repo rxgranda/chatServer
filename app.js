@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 app.get('/api/chats', (req, res) => {
 	Chat.getChats((err, chats) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(chats);
 	});
@@ -30,7 +30,7 @@ app.post('/api/chats', (req, res) => {
 	var chat = req.body;
 	Chat.addChat(chat, (err, chat) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(chat);
 	});
@@ -41,7 +41,7 @@ app.put('/api/chats/:_id', (req, res) => {
 	var chat = req.body;
 	Chat.updateChat(id, chat, {}, (err, chat) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(chat);
 	});
@@ -51,7 +51,7 @@ app.delete('/api/chats/:_id', (req, res) => {
 	var id = req.params._id;
 	Chat.removeChat(id, (err, chat) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(chat);
 	});
@@ -60,7 +60,7 @@ app.delete('/api/chats/:_id', (req, res) => {
 app.get('/api/users', (req, res) => {
 	User.getUsers((err, users) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(users);
 	});
@@ -69,7 +69,7 @@ app.get('/api/users', (req, res) => {
 app.get('/api/users/:_id', (req, res) => {
 	User.getUserById(req.params._id, (err, user) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(user);
 	});
@@ -81,7 +81,7 @@ app.post('/api/users', (req, res) => {
 	console.log(req);
 	User.addUser(user, (err, user) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(user);
 	});
@@ -92,7 +92,7 @@ app.put('/api/users/:_id', (req, res) => {
 	var user = req.body;
 	User.updateUser(id, user, {}, (err, user) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(user);
 	});
@@ -102,11 +102,11 @@ app.delete('/api/users/:_id', (req, res) => {
 	var id = req.params._id;
 	User.removeUser(id, (err, user) => {
 		if(err){
-			throw err;
+			 console.log(err); res.status(500).send({ error: 'Something failed!' });
 		}
 		res.json(user);
 	});
 });
 
-app.listen(3000);
-console.log('Running on port 3000...');
+app.listen(80);
+console.log('Running on port 80...');
