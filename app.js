@@ -78,7 +78,6 @@ app.get('/api/users/:_id', (req, res) => {
 app.post('/api/users', (req, res) => {
 	var user = req.body;
 
-	console.log(req);
 	User.addUser(user, (err, user) => {
 		if(err){
 			 console.log(err); res.status(500).send({ error: 'Something failed!' });
