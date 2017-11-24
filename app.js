@@ -6,103 +6,105 @@ const mongoose = require('mongoose');
 app.use(express.static(__dirname+'/client'));
 app.use(bodyParser.json());
 
-Genre =require('./models/genre');
-Book =require('./models/book');
+Chat =require('./models/chat');
+User =require('./models/user');
 
 // Connect to Mongoose
-mongoose.connect('mongodb://localhost/bookstore');
+mongoose.connect('mongodb://localhost/chatservice');
 var db = mongoose.connection;
 
 app.get('/', (req, res) => {
-	res.send('Please use /api/books or /api/genres');
+	res.send('Please use /api/users or /api/chats');
 });
 
-app.get('/api/genres', (req, res) => {
-	Genre.getGenres((err, genres) => {
+app.get('/api/chats', (req, res) => {
+	Chat.getChats((err, chats) => {
 		if(err){
 			throw err;
 		}
-		res.json(genres);
+		res.json(chats);
 	});
 });
 
-app.post('/api/genres', (req, res) => {
-	var genre = req.body;
-	Genre.addGenre(genre, (err, genre) => {
+app.post('/api/chats', (req, res) => {
+	var chat = req.body;
+	Chat.addChat(chat, (err, chat) => {
 		if(err){
 			throw err;
 		}
-		res.json(genre);
+		res.json(chat);
 	});
 });
 
-app.put('/api/genres/:_id', (req, res) => {
+app.put('/api/chats/:_id', (req, res) => {
 	var id = req.params._id;
-	var genre = req.body;
-	Genre.updateGenre(id, genre, {}, (err, genre) => {
+	var chat = req.body;
+	Chat.updateChat(id, chat, {}, (err, chat) => {
 		if(err){
 			throw err;
 		}
-		res.json(genre);
+		res.json(chat);
 	});
 });
 
-app.delete('/api/genres/:_id', (req, res) => {
+app.delete('/api/chats/:_id', (req, res) => {
 	var id = req.params._id;
-	Genre.removeGenre(id, (err, genre) => {
+	Chat.removeChat(id, (err, chat) => {
 		if(err){
 			throw err;
 		}
-		res.json(genre);
+		res.json(chat);
 	});
 });
 
-app.get('/api/books', (req, res) => {
-	Book.getBooks((err, books) => {
+app.get('/api/users', (req, res) => {
+	User.getUsers((err, users) => {
 		if(err){
 			throw err;
 		}
-		res.json(books);
+		res.json(users);
 	});
 });
 
-app.get('/api/books/:_id', (req, res) => {
-	Book.getBookById(req.params._id, (err, book) => {
+app.get('/api/users/:_id', (req, res) => {
+	User.getUserById(req.params._id, (err, user) => {
 		if(err){
 			throw err;
 		}
-		res.json(book);
+		res.json(user);
 	});
 });
 
-app.post('/api/books', (req, res) => {
-	var book = req.body;
-	Book.addBook(book, (err, book) => {
+app.post('/api/users', (req, res) => {
+	var user = req.body;
+
+	console.log(req);
+	User.addUser(user, (err, user) => {
 		if(err){
 			throw err;
 		}
-		res.json(book);
+		res.json(user);
 	});
 });
 
-app.put('/api/books/:_id', (req, res) => {
+app.put('/api/users/:_id', (req, res) => {
 	var id = req.params._id;
-	var book = req.body;
-	Book.updateBook(id, book, {}, (err, book) => {
+	var user = req.body;
+	User.updateUser(id, user, {}, (err, user) => {
 		if(err){
 			throw err;
 		}
-		res.json(book);
+		res.json(user);
 	});
 });
 
-app.delete('/api/books/:_id', (req, res) => {
+app.delete('/api/users/:_id', (req, res) => {
 	var id = req.params._id;
-	Book.removeBook(id, (err, book) => {
+	User.removeUser(id, (err, user) => {
 		if(err){
 			throw err;
 		}
-		res.json(book);
+		res.json(user);
 	});
 });
 
